@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  devallasclothingstore:
-    image: devallasclothingstore
+  clothingStoreUi:
+    image: clothing-store-ui
     build:
       context: UI
       dockerfile: ./Dockerfile
@@ -12,3 +12,14 @@ services:
       NODE_ENV: production
     ports:
       - 3000:3000
+  clothingStoreApi:
+    image: clothing-store-api
+    build:
+      context: api
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./api:/usr/src/app
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8080:8080
