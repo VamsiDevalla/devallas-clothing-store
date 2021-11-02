@@ -23,3 +23,29 @@ services:
       NODE_ENV: production
     ports:
       - 8080:8080
+  mongo_db:
+    image: mongo:latest
+    container_name: 'dstore-mongo-container'
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: dstore        # initial database to create
+      MONGO_INITDB_ROOT_USERNAME: devstore   # container root username
+      MONGO_INITDB_ROOT_PASSWORD: dsfjsdlujfoewrnj1232   # container root password
+    volumes: 
+      - ./db/init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      # to persist db data on local machine
+      # - ./db/dump:/data/db
+    ports:
+      - 27017:27017
+  mongo-express:
+  image: mongo-express:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: devstore
+      ME_CONFIG_MONGODB_ADMINPASSWORD: dsfjsdlujfoewrnj1232
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: dstore-mongo-container
+      ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
+      ME_CONFIG_MONGODB_AUTH_DATABASE: dstore
