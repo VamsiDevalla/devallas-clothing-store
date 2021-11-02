@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  devallasclothingstore:
+    image: devallasclothingstore
+    build:
+      context: UI
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./UI/src:/usr/src/app/src
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
