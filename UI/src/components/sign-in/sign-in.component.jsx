@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./sign-in.styles.scss";
+import { withRouter } from "react-router-dom";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import {
@@ -19,8 +20,8 @@ class SignIn extends Component {
   signIn = async (event, handler, email, password) => {
     event.preventDefault();
     try {
-      const uc = await handler(email, password);
-      console.log(uc, uc.user);
+      await handler(email, password);
+      this.props.history.push("/");
     } catch (e) {
       console.log(e);
     }
@@ -70,4 +71,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);
