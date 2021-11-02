@@ -3,11 +3,7 @@ import "./sign-in.styles.scss";
 import { withRouter } from "react-router-dom";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import {
-  emailSignIn,
-  signInWithGoogle,
-  signOut,
-} from "../../firebase/firebase-utils";
+import { emailSignIn, signInWithGoogle } from "../../firebase/firebase-utils";
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -56,16 +52,22 @@ class SignIn extends Component {
             value={password}
             required
           />
+          <div className="buttons">
+            <Button
+              onClick={(event) =>
+                this.signIn(event, emailSignIn, email, password)
+              }
+            >
+              SIGN IN
+            </Button>
+            <Button
+              onClick={(event) => this.signIn(event, signInWithGoogle)}
+              isGoogleSignIn
+            >
+              SIGN IN WITH GOOGLE
+            </Button>
+          </div>
         </form>
-        <Button
-          onClick={(event) => this.signIn(event, emailSignIn, email, password)}
-        >
-          SIGN IN
-        </Button>
-        <Button onClick={(event) => this.signIn(event, signInWithGoogle)}>
-          SIGN IN WITH GOOGLE
-        </Button>
-        <Button onClick={signOut}>SIGN OUT</Button>
       </div>
     );
   }
