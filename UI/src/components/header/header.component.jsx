@@ -16,13 +16,11 @@ const Header = ({ currentUser }) => {
           CONTACT
         </Link>
         {currentUser ? (
-          <div style={{ cursor: "pointer" }} onClick={signOut}>
+          <div className="option" onClick={signOut}>
             SING OUT
           </div>
         ) : (
-          <Link to="/signin" className="option">
-            SIGN IN
-          </Link>
+          <Link to="/signin">SIGN IN</Link>
         )}
       </div>
     </div>
