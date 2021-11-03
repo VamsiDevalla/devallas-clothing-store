@@ -1,51 +1,77 @@
 version: '3.4'
-
 services:
-  clothingStoreWeb:
-    image: clothing-store-web
-    build:
-      context: web
-      dockerfile: ./Dockerfile
-    volumes:
-      - ./web/src:/usr/src/app/src
-    environment:
-      NODE_ENV: production
-    ports:
-      - 3000:3000
-  clothingStoreApi:
-    image: clothing-store-api
-    build:
-      context: api
-      dockerfile: ./Dockerfile
-    volumes:
-      - ./api/src:/usr/src/app/src
-    environment:
-      NODE_ENV: production
-    ports:
-      - 8080:8080
   mongo_db:
     image: mongo:latest
-    container_name: 'dstore-mongo-container'
-    restart: always
+    container_name: 'dstore-db'
+    restart: unless-stopped
     environment:
-      MONGO_INITDB_DATABASE: dstore        # initial database to create
-      MONGO_INITDB_ROOT_USERNAME: devstore   # container root username
-      MONGO_INITDB_ROOT_PASSWORD: dsfjsdlujfoewrnj1232   # container root password
+      MONGO_INITDB_DATABASE: $MONGODB_DATABASE        # initial database to create
+      MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER   # container root username
+      MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASSWORD   # container root password
     volumes: 
       - ./db/init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       # to persist db data on local machine
-      # - ./db/dump:/data/db
+      - db:/data/db
     ports:
-      - 27017:27017
-  mongo-express:
-    image: mongo-express:latest
-    restart: always
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    networks:
+      - backend
+
+  clothingStoreApi:
+    depends_on:
+      - mongo_db
+    image: clothing-store-api
+    container_name: 'dstore-api'
+    build:
+      context: api
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: devstore
-      ME_CONFIG_MONGODB_ADMINPASSWORD: dsfjsdlujfoewrnj1232
-      ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_SERVER: dstore-mongo-container
-      ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
-      ME_CONFIG_MONGODB_AUTH_DATABASE: dstore
+      - DB_HOST=mongodb
+      - DB_USER=$MONGODB_USER
+      - DB_PASSWORD=$MONGODB_PASSWORD
+      - DB_NAME=$MONGODB_DATABASE
+      - DB_PORT=$MONGODB_DOCKER_PORT
+      - CLIENT_ORIGIN=$CLIENT_ORIGIN
+    networks:
+      - backend
+      - frontend
+  
+  clothingStoreWeb:
+    depends_on:
+      - clothingStoreApi
+    image: clothing-store-web
+    container_name: 'dstore-web'
+    build:
+      context: web
+      args:
+        - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
+      dockerfile: ./Dockerfile
     ports:
-        - 8081:8081
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    networks:
+      - frontend 
+
+volumes: 
+  db:
+
+networks:
+  backend:
+  frontend:
+  
+  
+  # mongo-express:
+  #   image: mongo-express:latest
+  #   restart: always
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: devstore
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: dsfjsdlujfoewrnj1232
+  #     ME_CONFIG_MONGODB_PORT: 27017
+  #     ME_CONFIG_MONGODB_SERVER: dstore-mongo-container
+  #     ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
+  #     ME_CONFIG_MONGODB_AUTH_DATABASE: dstore
+  #   ports:
+  #       - 8081:8081

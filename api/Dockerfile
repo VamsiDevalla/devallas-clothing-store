@@ -1,10 +1,16 @@
+FROM node:14-alpine as build-step
+WORKDIR /dstore
+COPY ["package.json", "yarn.lock", "./"]
+RUN yarn
+COPY . .
+RUN yarn build
+
 FROM node:14-alpine
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
+WORKDIR /dstore
+COPY --from=build-step /dstore/dist .
 COPY ["package.json", "yarn.lock", "./"]
 RUN yarn --production
-COPY . .
 EXPOSE 8080
-RUN chown -R node /usr/src/app
+RUN chown -R node /dstore/
 USER node
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "start"]

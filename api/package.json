@@ -2,7 +2,7 @@
   "name": "devalla-clothing-store-api",
   "version": "1.0.0",
   "description": "back end apis for devalla clothing store api",
-  "main": "dist/index.js",
+  "main": "index.js",
   "author": "Vamsi Devalla",
   "license": "MIT",
   "scripts": {
@@ -10,16 +10,18 @@
     "start": "node .",
     "dev": "ts-node-dev --poll src/index.ts",
     "lint": "eslint '*/**/*.{js,ts}'  --fix",
-    "prebuild": "eslint '*/**/*.{js,ts}' --fix",
+    "prebuild": "eslint '*/**/*.ts' --fix",
     "build": "tsc"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "firebase-admin": "^10.0.0",
     "mongoose": "^6.0.12"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/node": "^16.11.6",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
