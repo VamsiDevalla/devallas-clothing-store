@@ -16,6 +16,24 @@ services:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
     networks:
       - backend
+  
+  mongo-express:
+    depends_on:
+      - mongo_db
+    image: mongo-express:latest
+    container_name: 'dstore-db-admin'
+    restart: unless-stopped
+    environment:
+      ME_CONFIG_MONGODB_AUTH_DATABASE: $MONGODB_DATABASE
+      ME_CONFIG_MONGODB_ADMINUSERNAME: $MONGODB_USER
+      ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGODB_PASSWORD
+      ME_CONFIG_MONGODB_PORT: $MONGODB_LOCAL_PORT
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
+    ports:
+        - $DB_ADMIN_LOCAL_PORT:$DB_ADMIN_DOCKER_PORT
+    networks:
+      - backend
 
   clothingStoreApi:
     depends_on:
