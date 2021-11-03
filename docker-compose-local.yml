@@ -3,7 +3,7 @@ services:
   mongo_db:
     image: mongo:latest
     container_name: 'dstore-db-local'
-    restart: unless-stopped
+    restart: always
     environment:
       MONGO_INITDB_DATABASE: $MONGODB_DATABASE        # initial database to create
       MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER   # container root username
@@ -22,14 +22,18 @@ services:
       - mongo_db
     image: mongo-express:latest
     container_name: 'dstore-db-admin-local'
-    restart: unless-stopped
+    restart: always
     environment:
-      ME_CONFIG_MONGODB_AUTH_DATABASE: $MONGODB_DATABASE
+      ME_CONFIG_MONGODB_SERVER: "dstore-db-local"
+      # ME_CONFIG_MONGODB_ENABLE_ADMIN: "false"
+      ME_CONFIG_MONGODB_PORT: $MONGODB_DOCKER_PORT
+      ME_CONFIG_MONGODB_AUTH_DATABASE: $MONGODB_AUTH_DATABASE
+      ME_CONFIG_MONGODB_AUTH_USERNAME: $MONGODB_USER
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: $MONGODB_PASSWORD
+      ME_CONFIG_BASICAUTH_USERNAME: $DB_ADMIN_USERNAME
+      ME_CONFIG_BASICAUTH_PASSWORD: $DB_ADMIN_PASSWORD
       ME_CONFIG_MONGODB_ADMINUSERNAME: $MONGODB_USER
       ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGODB_PASSWORD
-      ME_CONFIG_MONGODB_PORT: $MONGODB_LOCAL_PORT
-      ME_CONFIG_MONGODB_SERVER: mongodb
-      ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
     ports:
         - $DB_ADMIN_LOCAL_PORT:$DB_ADMIN_DOCKER_PORT
     networks:

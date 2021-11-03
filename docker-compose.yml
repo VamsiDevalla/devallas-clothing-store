@@ -24,12 +24,16 @@ services:
     container_name: 'dstore-db-admin'
     restart: unless-stopped
     environment:
-      ME_CONFIG_MONGODB_AUTH_DATABASE: $MONGODB_DATABASE
+      ME_CONFIG_MONGODB_SERVER: dstore-db
+      # ME_CONFIG_MONGODB_ENABLE_ADMIN: "false"
+      ME_CONFIG_MONGODB_PORT: $MONGODB_DOCKER_PORT
+      ME_CONFIG_MONGODB_AUTH_DATABASE: $MONGODB_AUTH_DATABASE
+      ME_CONFIG_MONGODB_AUTH_USERNAME: $MONGODB_USER
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: $MONGODB_PASSWORD
+      ME_CONFIG_BASICAUTH_USERNAME: $DB_ADMIN_USERNAME
+      ME_CONFIG_BASICAUTH_PASSWORD: $DB_ADMIN_PASSWORD
       ME_CONFIG_MONGODB_ADMINUSERNAME: $MONGODB_USER
       ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGODB_PASSWORD
-      ME_CONFIG_MONGODB_PORT: $MONGODB_LOCAL_PORT
-      ME_CONFIG_MONGODB_SERVER: mongodb
-      ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
     ports:
         - $DB_ADMIN_LOCAL_PORT:$DB_ADMIN_DOCKER_PORT
     networks:
@@ -79,17 +83,3 @@ volumes:
 networks:
   backend:
   frontend:
-  
-  
-  # mongo-express:
-  #   image: mongo-express:latest
-  #   restart: always
-  #   environment:
-  #     ME_CONFIG_MONGODB_ADMINUSERNAME: devstore
-  #     ME_CONFIG_MONGODB_ADMINPASSWORD: dsfjsdlujfoewrnj1232
-  #     ME_CONFIG_MONGODB_PORT: 27017
-  #     ME_CONFIG_MONGODB_SERVER: dstore-mongo-container
-  #     ME_CONFIG_MONGODB_ENABLE_ADMIN : "true"
-  #     ME_CONFIG_MONGODB_AUTH_DATABASE: dstore
-  #   ports:
-  #       - 8081:8081
