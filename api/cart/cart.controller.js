@@ -1,0 +1,15 @@
+const cartRouter = require("express").Router();
+
+cartRouter.get("/", (req, res) => {
+  return res.send("will respond with all the items in the cart");
+});
+
+cartRouter.post("/add", (req, res) => {
+  return res.send("will add the product to the cart");
+});
+
+cartRouter.get("/remove/:productId", (req, res) => {
+  return res.send("will remove given item from the cart " + req.params.id);
+});
+
+module.exports = cartRouter;
