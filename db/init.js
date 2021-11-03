@@ -9,7 +9,27 @@ db.createUser({
   ],
 });
 
-const products = [];
+const products = [
+  {
+    name: "Suite D Costa",
+    inventory: [
+      {
+        size: "sm",
+        quantity: "25",
+        price: 9.99,
+        availableColors: [
+          {
+            color: "#11111",
+            imageUrls: ["https://item-image.jpg"],
+          },
+        ],
+      },
+    ],
+    description: "Beautiful, handmade journal.",
+    categories: ["Suites", "bestsellers", "Mens"],
+    coverImage: "items/journal.jpg",
+  },
+];
 db.products.drop();
 db.products.insertMany(products);
 
@@ -34,19 +54,19 @@ db.products.insertMany(payments);
  *   inventory: [
  *     {
  *       size: 'sm',
- *       quantity: '25',
+ *       quantity: 25,
  *       price: 9.99,
- *       available-colors: [ 
+ *       availableColors: [ 
  *          {
- *             color: #11111,
- *             image-urls: ["https://item-image.jpg"]
+ *             color: "#11111",
+ *             imageUrls: ["https://item-image.jpg"]
  *          }
  *       ]
  *     }
- *   ] 
+ *   ], 
  *   description: "Beautiful, handmade journal.",
  *   categories: ["Suites", "bestsellers", "Mens"],
- *   cover-image: "items/journal.jpg" 
+ *   coverImage: "items/journal.jpg" 
  * }
  */
 
