@@ -2,7 +2,7 @@
   "name": "devalla-clothing-store-api",
   "version": "1.0.0",
   "description": "back end apis for devalla clothing store api",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Vamsi Devalla",
   "license": "MIT",
   "dependencies": {
@@ -14,6 +14,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "start": "node .",
+    "dev": "nodemon ./src/index.js"
   }
 }

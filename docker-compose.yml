@@ -18,7 +18,7 @@ services:
       context: api
       dockerfile: ./Dockerfile
     volumes:
-      - ./api:/usr/src/app
+      - ./api/src:/usr/src/app/src
     environment:
       NODE_ENV: production
     ports:
