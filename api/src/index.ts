@@ -5,7 +5,7 @@ import cors from 'cors';
 import cartRouter from './cart/cart.controller';
 import ordersRouter from './orders/orders.controller';
 import productRouter from './products/product.controller';
-import DB from './db/db.helper';
+import DB from './db/database.helper';
 
 dotenv.config();
 
@@ -29,9 +29,8 @@ app.use('/api/cart', cartRouter);
 async function run(): Promise<void> {
   try {
     await DB.init();
-  } catch (e) {
-    console.error(e);
-    process.exit(3);
+  } catch (error) {
+    throw new Error('Failed to connect to db', error);
   }
 
   app.listen(PORT, () => {
@@ -41,8 +40,8 @@ async function run(): Promise<void> {
 
 try {
   run();
-} catch (e) {
-  console.log(e);
+} catch (error) {
+  throw new Error('failed to launch api server', error);
 }
 
 export default app;
