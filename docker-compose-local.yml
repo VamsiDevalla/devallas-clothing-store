@@ -9,7 +9,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER   # container root username
       MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASSWORD   # container root password
     volumes: 
-      - ./db/init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      # - ./db/init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       # to persist db data on local machine
       - db:/data/db
     ports:
@@ -86,8 +86,6 @@ services:
 
 volumes: 
   db:
-  web:
-  node_modules:
 
 networks:
   app-network:
