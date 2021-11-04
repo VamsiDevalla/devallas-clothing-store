@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prebuild": "yarn format && yarn lint",
-    "lint": "eslint --fix src/**/*.tsx"
+    "lint": "eslint --fix src/**/*.{'ts','tsx'}"
   },
   "eslintConfig": {
     "extends": [

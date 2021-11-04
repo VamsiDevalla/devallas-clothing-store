@@ -44,7 +44,7 @@ const menuItemList: MenuItemModel[] = [
     linkUrl: 'shop/mens',
   },
 ];
-class Directory extends Component<Record<string, unknown>, { menuItems: MenuItem[] }> {
+class Directory extends Component<Record<string, unknown>, { menuItems: MenuItemModel[] }> {
   constructor(properties: PropsWithChildren<Record<string, unknown>>) {
     super(properties);
     this.state = {

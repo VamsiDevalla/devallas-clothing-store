@@ -5,7 +5,7 @@ import { signOut } from '../../firebase/firebase-utils';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../logo.svg';
 
-type HeaderProperty = PropsWithChildren<{ currentUser: User | null }>;
+type HeaderProperty = PropsWithChildren<{ currentUser: User | undefined }>;
 
 const Header = ({ currentUser }: HeaderProperty): JSX.Element => {
   return (
@@ -32,7 +32,7 @@ const Header = ({ currentUser }: HeaderProperty): JSX.Element => {
             SING OUT
           </div>
         ) : (
-          <Link to='/signin'>SIGN IN</Link>
+          <Link to='/signIn'>SIGN IN</Link>
         )}
       </div>
     </div>
