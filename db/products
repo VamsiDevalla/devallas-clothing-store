@@ -1,0 +1,1 @@
+[{"_id":{"$oid":"6183f0f4c910698fc08f8ced"},"name":"Suite D Costa","inventory":[{"size":"sm","quantity":25,"price":9.99,"availableColors":[{"color":"#11111","imageUrls":["https://item-image.jpg"]}]}],"description":"Beautiful, handmade journal.","categories":["Suites","bestsellers","Mens"],"coverImage":"items/journal.jpg"}]
