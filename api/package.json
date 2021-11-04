@@ -10,7 +10,6 @@
         "start": "node .",
         "dev": "nodemon --watch 'src/**/*' --exec 'ts-node' src/index.ts",
         "lint": "eslint 'src/**/*.ts'  --fix",
-        "format": "prettier --write src/**/*.tsx",
         "prebuild": "yarn format && yarn lint",
         "build": "tsc"
     },

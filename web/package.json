@@ -21,9 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prebuild": "yarn format && yarn lint",
-    "format": "prettier --write src/**/*.tsx",
-    "lint": "eslint --fix src/**/*.tsx",
-    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
+    "lint": "eslint --fix src/**/*.tsx"
   },
   "eslintConfig": {
     "extends": [
