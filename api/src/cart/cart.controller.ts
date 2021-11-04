@@ -9,7 +9,7 @@ cartRouter.post('/add', (req, res) => {
 });
 
 cartRouter.get('/remove/:productId', (req, res) =>
-  res.send(`will remove given item from the cart ${req.params.productId}`)
+  res.send(`will remove given item from the cart ${req.params.productId}`),
 );
 
 export default cartRouter;

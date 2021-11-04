@@ -1,35 +1,22 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: ['airbnb-base', 'prettier'],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 13,
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint', 'prettier'],
-  rules: {
-    'prettier/prettier': [
-      1,
-      {
-        trailingComma: 'es5',
-        singleQuote: true,
-        semi: true,
-        arrowParens: 'always',
-        bracketSpacing: true,
-        tabWidth: 2,
-      },
-    ],
-    'no-console': 0,
-    'import/extensions': 'off',
-  },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
+    env: {
+        node: true,
+        es6: true,
     },
-  },
+    extends: ['airbnb-base', 'prettier', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+    },
+    plugins: ['@typescript-eslint', 'prettier'],
+    rules: {
+        'no-var': 'error',
+        semi: 'error',
+        indent: ['error', 2, { SwitchCase: 1 }],
+        'no-multi-spaces': 'error',
+        'space-in-parens': 'error',
+        'no-multiple-empty-lines': 'error',
+        'prefer-const': 'error',
+    },
 };
