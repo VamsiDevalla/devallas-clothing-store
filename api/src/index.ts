@@ -30,7 +30,7 @@ async function run(): Promise<void> {
   try {
     await DB.init();
   } catch (error) {
-    throw new Error('Failed to connect to db', error);
+    throw error;
   }
 
   app.listen(PORT, () => {
@@ -41,7 +41,7 @@ async function run(): Promise<void> {
 try {
   run();
 } catch (error) {
-  throw new Error('failed to launch api server', error);
+  throw error;
 }
 
 export default app;

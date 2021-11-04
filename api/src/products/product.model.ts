@@ -1,11 +1,30 @@
-import { model, Schema, Model, Document } from 'mongoose';
+import { Document } from 'mongoose';
 
-export type IProduct = Document;
+export interface ProductDto {
+  id: string;
+  name: string;
+  description?: string;
+  categories: string[];
+  coverImage: string;
+  inventory: IProductVariant[];
+}
 
-const ProductSchema: Schema = new Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: false },
-  categories: { type: [String], required: true },
-});
+export interface IProduct extends Document {
+  name: string;
+  description?: string;
+  categories: string[];
+  coverImage: string;
+  inventory: IProductVariant[];
+}
 
-export const Product: Model<IProduct> = model('Product', ProductSchema);
+export interface IProductVariant {
+  size: string;
+  quantity: number;
+  price: 9.99;
+  availableColors: [
+    {
+      color: color;
+      imageUrls: string[];
+    },
+  ];
+}

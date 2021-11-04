@@ -49,25 +49,25 @@ db.products.insertMany(payments);
 
 // Products
 /**
- * {
- *   name: "Suite D Costa",
- *   inventory: [
- *     {
- *       size: 'sm',
- *       quantity: 25,
- *       price: 9.99,
- *       availableColors: [ 
- *          {
- *             color: "#11111",
- *             imageUrls: ["https://item-image.jpg"]
- *          }
- *       ]
- *     }
- *   ], 
- *   description: "Beautiful, handmade journal.",
- *   categories: ["Suites", "bestsellers", "Mens"],
- *   coverImage: "items/journal.jpg" 
- * }
+  {
+    "name": "Suite D Costa",
+    "inventory": [
+      {
+        "size": 'sm',
+        "quantity": 25,
+        "price": 9.99,
+        "availableColors": [ 
+           {
+              "color": "#11111",
+              "imageUrls": ["https://item-image.jpg"]
+           }
+        ]
+      }
+    ], 
+    "description": "Beautiful, handmade journal.",
+    "categories": ["Suites", "bestsellers", "Mens"],
+    "coverImage": "items/journal.jpg" 
+  }
  */
 
 
