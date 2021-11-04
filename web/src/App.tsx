@@ -9,17 +9,17 @@ import Shop from './pages/shop/shop.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 class App extends Component<Record<string, unknown>, { currentUser: User | null }> {
-  unSubscribeFromAuth: Unsubscribe | null = null;
+  unSubscribeFromAuth: Unsubscribe | undefined = undefined;
 
-  constructor(props: PropsWithChildren<Record<string, unknown>>) {
-    super(props);
+  constructor(properties: PropsWithChildren<Record<string, unknown>>) {
+    super(properties);
     this.state = {
-      currentUser: null,
+      currentUser: undefined,
     };
   }
 
   componentDidMount(): void {
-    this.unSubscribeFromAuth = onAuthStateChanged(auth, (user) => this.setState({ currentUser: user }));
+    this.unSubscribeFromAuth = onAuthStateChanged(auth, user => this.setState({ currentUser: user }));
   }
 
   componentWillUnmount(): void {

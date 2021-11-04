@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import CollectionItem from '../collection-item/collection-item.component';
 import './preview-collection.styles.scss';
 
-type previewCollectionProps = PropsWithChildren<{
+type PreviewCollectionProperties = PropsWithChildren<{
   title: string;
   items: Array<{
     id: number;
@@ -12,13 +12,13 @@ type previewCollectionProps = PropsWithChildren<{
   }>;
 }>;
 
-const PreviewCollection = ({ title, items }: previewCollectionProps): JSX.Element => {
+const PreviewCollection = ({ title, items }: PreviewCollectionProperties): JSX.Element => {
   return (
     <div className='collection-preview'>
       <h1 className='collection-title'>{title.toUpperCase()}</h1>
       <div className='preview-section'>
         {items
-          .filter((_, idx) => idx < 4)
+          .filter((_, index) => index < 4)
           .map(({ id, name, price, imageUrl }) => (
             <CollectionItem key={id} name={name} price={price} imageUrl={imageUrl} />
           ))}

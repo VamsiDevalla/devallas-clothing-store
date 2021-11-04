@@ -4,8 +4,8 @@ import './shop.styles.scss';
 import PreviewCollection from '../../components/preview-collection/preview-collection.component';
 
 class Shop extends Component<Record<string, unknown>, { collections: Collection }> {
-  constructor(props: PropsWithChildren<Record<string, unknown>>) {
-    super(props);
+  constructor(properties: PropsWithChildren<Record<string, unknown>>) {
+    super(properties);
     this.state = {
       collections: SHOP_DATA,
     };
@@ -16,8 +16,8 @@ class Shop extends Component<Record<string, unknown>, { collections: Collection 
     return (
       <div className='shopPage'>
         <h1>Shop Page </h1>
-        {collections.map(({ id, ...otherCollectionProps }) => (
-          <PreviewCollection key={id} {...otherCollectionProps} />
+        {collections.map(({ id, ...otherCollectionProperties }) => (
+          <PreviewCollection key={id} {...otherCollectionProperties} />
         ))}
       </div>
     );

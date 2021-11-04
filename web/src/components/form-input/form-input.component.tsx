@@ -1,21 +1,21 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef } from 'react';
 import './form-input.styles.scss';
 
-interface FormProps extends ComponentPropsWithoutRef<'input'> {
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+interface FormProperties extends ComponentPropsWithoutRef<'input'> {
+  handleChange: (error: ChangeEvent<HTMLInputElement>) => void;
   id: string;
   label: string;
 }
 
-const FormInput = ({ handleChange, id = 'customInput', label, ...otherProps }: FormProps): JSX.Element => {
+const FormInput = ({ handleChange, id = 'customInput', label, ...otherProperties }: FormProperties): JSX.Element => {
   return (
     <div className='group'>
-      <input id={id} className='form-input' onChange={handleChange} {...otherProps} />
+      <input id={id} className='form-input' onChange={handleChange} {...otherProperties} />
       {label ? (
-        <label htmlFor={id} className={`${otherProps.value ? 'shrink' : ''} form-input-label`}>
+        <label htmlFor={id} className={`${otherProperties.value ? 'shrink' : ''} form-input-label`}>
           {label}
         </label>
-      ) : null}
+      ) : undefined}
     </div>
   );
 };

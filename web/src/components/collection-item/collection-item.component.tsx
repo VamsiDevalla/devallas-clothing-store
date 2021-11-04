@@ -1,13 +1,13 @@
 import React, { PropsWithChildren } from 'react';
 import './collection-item.styles.scss';
 
-type collectionProps = PropsWithChildren<{
+type CollectionProperties = PropsWithChildren<{
   imageUrl: string;
   name: string;
   price: number;
 }>;
 
-const CollectionItem = ({ imageUrl, name, price }: collectionProps): JSX.Element => {
+const CollectionItem = ({ imageUrl, name, price }: CollectionProperties): JSX.Element => {
   return (
     <div className='collection-item'>
       <div

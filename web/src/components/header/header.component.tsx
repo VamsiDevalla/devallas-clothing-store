@@ -5,9 +5,9 @@ import { signOut } from '../../firebase/firebase-utils';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../logo.svg';
 
-type headerProp = PropsWithChildren<{ currentUser: User | null }>;
+type HeaderProperty = PropsWithChildren<{ currentUser: User | null }>;
 
-const Header = ({ currentUser }: headerProp): JSX.Element => {
+const Header = ({ currentUser }: HeaderProperty): JSX.Element => {
   return (
     <div className='header'>
       <Link to='/' className='logo-container'>

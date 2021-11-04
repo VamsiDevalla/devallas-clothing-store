@@ -2,7 +2,7 @@ import React, { Component, PropsWithChildren } from 'react';
 import MenuItem from '../menu-item/menu-item.component';
 import './directory.styles.scss';
 
-type MenuItem = {
+type MenuItemModel = {
   title: string;
   imageUrl: string;
   id: number;
@@ -10,7 +10,7 @@ type MenuItem = {
   size?: 'large' | 'sm' | 'xl' | 'md';
 };
 
-const menuItemList: MenuItem[] = [
+const menuItemList: MenuItemModel[] = [
   {
     title: 'hats',
     imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
@@ -45,8 +45,8 @@ const menuItemList: MenuItem[] = [
   },
 ];
 class Directory extends Component<Record<string, unknown>, { menuItems: MenuItem[] }> {
-  constructor(props: PropsWithChildren<Record<string, unknown>>) {
-    super(props);
+  constructor(properties: PropsWithChildren<Record<string, unknown>>) {
+    super(properties);
     this.state = {
       menuItems: menuItemList,
     };

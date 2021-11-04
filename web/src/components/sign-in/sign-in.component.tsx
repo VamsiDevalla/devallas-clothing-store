@@ -6,8 +6,8 @@ import Button from '../button/button.component';
 import { signInWithEmail, signInWithGoogle } from '../../firebase/firebase-utils';
 
 class SignIn extends Component<RouteComponentProps, { email: string; password: string }> {
-  constructor(props: RouteComponentProps) {
-    super(props);
+  constructor(properties: RouteComponentProps) {
+    super(properties);
     this.state = {
       email: '',
       password: '',
@@ -19,7 +19,7 @@ class SignIn extends Component<RouteComponentProps, { email: string; password: s
     try {
       await signInWithEmail(email, password);
       this.props.history.push('/');
-    } catch (e) {
+    } catch {
       throw new Error('sign In with email failed');
     }
   };
@@ -29,7 +29,7 @@ class SignIn extends Component<RouteComponentProps, { email: string; password: s
     try {
       await signInWithGoogle();
       this.props.history.push('/');
-    } catch (e) {
+    } catch {
       throw new Error('sign In with google failed');
     }
   };
@@ -70,10 +70,10 @@ class SignIn extends Component<RouteComponentProps, { email: string; password: s
             handleChange={this.handleChange}
           />
           <div className='buttons'>
-            <Button onClick={(event) => this.emailSignIn(event, email, password)} isGoogleSignIn={false}>
+            <Button onClick={event => this.emailSignIn(event, email, password)} isGoogleSignIn={false}>
               SIGN IN
             </Button>
-            <Button onClick={(event) => this.googleSignIn(event)} isGoogleSignIn>
+            <Button onClick={event => this.googleSignIn(event)} isGoogleSignIn>
               SIGN IN WITH GOOGLE
             </Button>
           </div>
